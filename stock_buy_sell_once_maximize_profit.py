@@ -4,6 +4,7 @@ for easiest explanation watch https://www.youtube.com/watch?v=76-CYD0jn7s
 
 import sys 
 a = [100,80,120,130,70,60,100,125]
+a = [9, 11, 8, 5, 7, 10]
 
 def maximum_profit(a):
     n = len(a)
