@@ -1,7 +1,8 @@
 '''
 Sudoku Solver:
 Given a partially filled 9X9 grid, the goal is to assign digits from 1 to 9 to the empty cells, so that every row, column and subgrid of size 3X3
-contains exactly one instance of the digits from 1 to 9
+contains exactly one instance of the digits from 1 to 9.
+read this https://www.geeksforgeeks.org/sudoku-backtracking-7/
 '''
 
 grid=[[3,0,6,5,0,8,4,0,0], 
