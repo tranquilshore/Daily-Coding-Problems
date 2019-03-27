@@ -46,6 +46,7 @@ knight_tour(visited,0,0,pos)
 Chess Knight Problem:
 given a chess board, find the shortest distance taken by a knight to reach given destination from given source.
 using bfs to find the shortest distance.
+read this https://www.techiedelight.com/chess-knight-problem-find-shortest-path-source-destination/
 '''
 
 from collections import namedtuple
