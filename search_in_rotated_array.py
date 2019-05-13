@@ -14,7 +14,7 @@ def pivoted_binary_search(a,key):
         return binary_search(a,0,len(a)-1,key)
 
     if a[pivot] == key:
-        return pivot 
+        return pivot
     if a[0] < key:
         return binary_search(a,0,pivot-1,key)
     return binary_search(a,pivot+1,len(a)-1,key)

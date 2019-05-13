@@ -12,6 +12,10 @@ size()
 push()
 pop()
 peek()
+
+using two stacks we can implement queue:
+as we push elements in stack and to dequeue the first element we need to reverse the stack and put in another stack in order and remove the 
+top of that other stack.
 '''
 
 class queue:
