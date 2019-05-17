@@ -67,6 +67,16 @@ def longest_palindromic_subsequence(s):
     return T[0][n-1]
 
 print longest_palindromic_subsequence(s)
-    
+
+'''
+Given a string, find out if the string is K-Palindrome or not. A K-palindrome string transforms into a palindrome on removing at most k characters from it.
+
+eg String - abcdecba, k = 1 ans - yes
+
+If the difference between longest palindromic 
+subsequence and the original string is less 
+than equal to k, then the string is k-palindrome
+
+'''
 
     
