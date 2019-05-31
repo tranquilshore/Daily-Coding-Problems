@@ -4,8 +4,8 @@ watch https://www.youtube.com/watch?v=qzYhjk-nDGU&t=267s for problem and solutio
 
 import collections
 
-s = "figehaeci"
-t = "aei"
+s = "timetopractice"
+t = "toc"
 
 def minimum_substring_window(s,t):
     need = collections.Counter(t)
