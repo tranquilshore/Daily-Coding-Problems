@@ -179,3 +179,45 @@ def subsetsum_bottomup(s,target):
 
 print subsetsum_bottomup(s,target)
 
+####################################################################################################################################
+
+#minimum sum partition
+#idea is same to include an element in one set and exclude it from it and add it to another set
+
+s = [10,20,15,5,25]
+#s = [36,7,46,40]
+n = len(s)
+
+
+#recursive
+def minimum_sum_partition(s,n,s1,s2):#s1 and s2 are sum of two subsets
+    if n < 0: #if list becomes empty
+        return abs(s1-s2)
+    
+    #include current item in the subset 1 and recur for remaining items
+    incl = minimum_sum_partition(s,n-1,s1+s[n],s2)
+    #exclude the current item from subset 1 and recur for remaining items
+    excl = minimum_sum_partition(s,n-1,s1,s2+s[n])
+    return min(incl,excl)
+
+print minimum_sum_partition(s,n-1,0,0)
+
+#dp top down
+lookup = {}
+def minimum_sum_partition_topdown(s,n,s1,s2):
+    if n < 0:
+        return abs(s1-s2)
+    key = str(n)+"|"+str(s1)
+    if lookup.has_key(key) == False:
+        incl = minimum_sum_partition_topdown(s,n-1,s1+s[n],s2)
+        excl = minimum_sum_partition_topdown(s,n-1,s1,s2+s[n])
+        lookup[key] = min(incl,excl)
+    return lookup[key]
+
+print minimum_sum_partition_topdown(s,n-1,0,0)
+
+
+
+
+
+
