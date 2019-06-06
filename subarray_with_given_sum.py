@@ -32,6 +32,38 @@ k = 9
 n = len(a)
 
 print subarray_with_given_sum(a,n,k)
+
+'''
+Largest subarray with 0 sum
+'''
+
+a = [15,-2,2,-8,1,7,10,23]
+
+def largest_subarray_zero_sum(a):
+    n = len(a)
+    d = {}
+
+    curr_sum = 0
+    max_len = 0 
+
+    for i in range(n):
+        curr_sum += a[i]
+
+        if a[i] == 0 and max_len == 0:#if an element with value 0 is present
+            max_len = 1
+        
+        if curr_sum == 0: #if that subarray starts from the starting index
+            max_len = i+1 
+
+        if curr_sum in d:
+            max_len = max(max_len,i-d[curr_sum])
+        else:
+            d[curr_sum] = i 
+    return max_len
+
+print largest_subarray_zero_sum(a)
+        
+
     
 
     
