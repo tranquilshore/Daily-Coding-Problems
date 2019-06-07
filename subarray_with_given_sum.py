@@ -62,6 +62,93 @@ def largest_subarray_zero_sum(a):
     return max_len
 
 print largest_subarray_zero_sum(a)
+
+'''
+find pair/pairs with given sum
+O(n)
+'''
+
+a = [8,7,2,5,3,1]
+target = 10 
+
+def pair_sum(a,target):
+    n = len(a)
+    d = {}
+
+    for i in range(n):
+        if d.has_key(target-a[i]):
+            print "at index ",d[target-a[i]]," and ", i 
+        d[a[i]] = i 
+
+print pair_sum(a,target)
+
+'''
+Four sum problem
+unsorted array is given check if it contains four elements with given sum
+
+Idea: take all the pairs and solve it like find pairs problem like above
+O(n^2) solution
+'''
+from collections import defaultdict
+
+a = [2,7,4,0,9,5,1,3]
+target = 20 
+
+def four_sum(a,target):
+    n = len(a)
+    d = defaultdict(list)
+
+    for i in range(n):
+        for j in range(i+1,n):
+            if d.has_key(target - (a[i]+a[j])):
+                tmp = d[target - (a[i]+a[j])]
+                #to make sure there is no repeated element
+                if tmp[0] != i and tmp[0] != j and tmp[1] != i and tmp[1] != j:
+                    print tmp[0],tmp[1],"|",i,j 
+                    return True 
+
+            d[a[i]+a[j]] = (i,j)
+four_sum(a,target)
+
+'''
+swapping pairs make sum equal
+
+Find a pair in two array swapping which makes the sum of both the arrays same.
+Idea- 
+We are looking for two values, a and b, such that: 
+sumA - a + b = sumB - b + a
+    2a - 2b  = sumA - sumB
+      a - b  = (sumA - sumB) / 2
+
+      that means a = (sumA-sumB)/2 + b
+we need to find above a in array A
+
+O(n+m) complexity
+'''
+
+a=[4, 1, 2, 1, 1, 2]
+b=[3, 6, 3, 3]
+
+# a = [5, 7, 4, 6]
+# b = [1, 2, 3, 8]
+
+def swap_pairs(a,b):
+    sum1 = sum(a)
+    sum2 = sum(b)
+    d = defaultdict(int)
+    diff = (sum1-sum2)/2
+
+    for i in a:
+        d[i] += 1 
+
+    for i in b:
+        if d.has_key(diff+i):
+            print diff+i,"|",i 
+            return True 
+    
+    return False 
+
+swap_pairs(a,b)
         
 
     
