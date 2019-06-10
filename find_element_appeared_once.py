@@ -5,6 +5,7 @@ n = len(a)
 def search(a,low,high):
     if low>high:
         return None 
+    
     if low == high:
         return a[low]
     
