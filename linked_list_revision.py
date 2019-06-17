@@ -155,7 +155,7 @@ like quick sort makes them perform poorly, but not in merge sort.
 '''
 
 #finding middle code
-def middle(head):
+def middle1(head):
     if head is None: return None 
     if head.next is None or head.next.next is None:
         return head 
@@ -182,7 +182,7 @@ def mergesort_linkedlist(head):
     if head is None or head.next is None:
         return head 
     
-    middle_ = middle(head)
+    middle_ = middle1(head)
     nextofmiddle = middle_.next 
 
     middle_.next = None 
@@ -191,7 +191,46 @@ def mergesort_linkedlist(head):
 
     return sortedmerge(left,right)
 
-printll(mergesort_linkedlist(head))
+#printll(mergesort_linkedlist(head))
+
+#flatten a linked list 
+class flattennode:
+    def __init__(self,value):
+        self.data = value 
+        self.right = None 
+        self.down = None 
+
+headf = flattennode(2)
+headf.right = flattennode(1)
+headf.down = flattennode(4)
+headf.down.down = flattennode(6)
+headf.right.down = flattennode(11)
+headf.right.down.down = flattennode(19)
+
+def flatten(head):
+    if head is None or head.right is None:
+        return head 
+    return flatmerge(head,flatten(head.right))
+
+def flatmerge(a,b):
+    result = None 
+    if a is None: return b 
+    if b is None: return a 
+    if a.data <= b.data:
+        result = a 
+        result.down = flatmerge(a.down,b)
+    if a.data > b.data:
+        result = b 
+        result.down = flatmerge(a,b.down)
+    return result 
+    
+def printflatten(node):
+    tmp = node 
+    while tmp:
+        print tmp.data, 
+        tmp = tmp.down
+
+printflatten(flatten(headf))
 
 
 
