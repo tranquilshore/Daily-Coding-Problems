@@ -26,7 +26,37 @@ def children_sum_property(root):
             return 1 
         else:
             return 0 
-if children_sum_property(child_sum_node):
+# if children_sum_property(child_sum_node):
+#     print "holds the property"
+# else:
+#     print "doesn't"
+
+#can easily be done using level order traversal 
+def children_sum_property_iterative(root):
+    if root is None: return True 
+    q = []
+    q.append(root)
+    while q:
+        current = q.pop(0)
+        if current.left and current.right:
+            if current.data != current.left.data + current.right.data :
+                return False 
+            q.append(current.left)
+            q.append(current.right)
+        
+        elif current.left is None and current.right:
+            if current.data != current.right.data:
+                return False 
+            q.append(current.right)
+        
+        elif current.left and current.right is None :
+            if current.data != current.left.data:
+                return False 
+            q.append(current.left)
+    
+    return True 
+
+if children_sum_property_iterative(child_sum_node):
     print "holds the property"
 else:
     print "doesn't"
