@@ -230,7 +230,59 @@ def printflatten(node):
         print tmp.data, 
         tmp = tmp.down
 
-printflatten(flatten(headf))
+#printflatten(flatten(headf))
+
+#pairwise swap 
+
+def pairwise_swap(head):
+    if head is None or head.next is None:
+        return head 
+    prev = head 
+    curr = head.next 
+    head = curr
+    while True:
+        nxt = curr.next
+        curr.next = prev 
+        if nxt is None or nxt.next is None:
+            prev.next = nxt 
+            printll(head)
+            return 
+        prev.next = nxt.next 
+        prev = nxt 
+        curr = prev.next 
+    printll(head)
+
+#pairwise_swap(head)
+
+def addll(first,second):
+    carry = 0 
+    temp = None 
+    head = None 
+    prev = None 
+    while first or second:
+        fdata = 0 if first is None else first.data 
+        sdata = 0 if second is None else second.data 
+        sum_ = carry+fdata+sdata
+        carry = 1 if sum_ >= 10 else 0
+        sum_ = sum_ if sum_<10 else sum_%10
+        temp = Node(sum_)
+
+        if head is None:
+            head = temp 
+        else:
+            prev.next = temp 
+        
+        prev = temp 
+        if first:
+            first = first.next 
+        if second:
+            second = second.next 
+    if carry>0:
+        temp.next = Node(carry)
+    return head 
+
+
+
 
 
 
