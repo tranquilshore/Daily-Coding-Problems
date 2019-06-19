@@ -120,6 +120,45 @@ def coin_change_ways_bottomup(s,target):
 
 print coin_change_ways_bottomup(s,target)
 
+####################################################################################################################################
+#coin change (minimum number of coins)
+
+s = [1,2,3,4]
+target = 15
+
+n = len(s)-1
+
+def minimum_coins(s,n,target):
+    if target == 0:
+        return 0
+    if n<0 or target<0:
+        return sys.maxint
+    
+    incl = 1+minimum_coins(s,n,target-s[n]) #as we including a coin add 1
+    excl = minimum_coins(s,n-1,target)
+    return min(incl,excl)
+
+print minimum_coins(s,n,target)
+
+def find_min_coins_bottomup(s,target):
+    n = len(s)
+    m = target
+
+    T = [[0 for i in range(m+1)] for i in range(n+1)]
+
+    for i in range(m+1):
+        T[0][i] = sys.maxint
+
+    for i in range(1,n+1):
+        for j in range(1,m+1):
+            if s[i-1] > j:
+                T[i][j] = T[i-1][j]
+            else:
+                T[i][j] = min(T[i-1][j], T[i][j-s[i-1]] + 1)
+
+    return T[n][m]
+
+print find_min_coins_bottomup(s,target)
 
 ####################################################################################################################################
 
