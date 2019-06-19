@@ -16,5 +16,6 @@ def minjumps_linear(a):
             stairs = ladder - level
     return jumps
 #a = [2,3,1,1,2,4,2,0,1,1]
-a = [1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9]
+#a = [1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9]
+a = [3,2,4,1,2,5,6,1]
 print minjumps_linear(a)    

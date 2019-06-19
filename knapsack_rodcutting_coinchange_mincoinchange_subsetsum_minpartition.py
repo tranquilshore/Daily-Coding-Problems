@@ -57,6 +57,28 @@ def knapsack_bottomup(values,weights,capacity):
     return T[n][m]
 
 print knapsack_bottomup(values,weights,capacity)
+###############################################################################################################################################
+#rod cutting is same as knapsack 
+#important - only difference is that infinite rod cuts can be taken into consideration
+
+length = [1,2,3,4,5,6,7,8]
+profit = [1,5,8,9,10,17,17,20]
+target = 8
+n = len(profit)-1
+import sys 
+def rod_cut_profit(length,profit,n,target):
+    if target==0:
+        return 0
+    if target < 0 or n<0:
+        return -sys.maxint
+    incl = profit[n] + rod_cut_profit(length,profit,n,target-length[n]) #only change is we recurse with same n (as infinite cuts are allowed)
+    excl = rod_cut_profit(length,profit,n-1,target)
+    return max(incl,excl)
+
+print rod_cut_profit(length,profit,n,target)
+
+#dp solution will be the same as of knapsack above with just a minute change that we will look at the same row
+
 
 ###############################################################################################################################################
 
