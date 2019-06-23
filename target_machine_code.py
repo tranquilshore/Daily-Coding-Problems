@@ -16,31 +16,40 @@ class CRUD:
     
     def put(self,item):
         price = item.price 
-        if item.start_date != "null":
-            start_date_formatted = datetime.strptime(item.start_date,CRUD.format_str)
-            end_date_formatted = datetime.strptime(item.end_date,CRUD.format_str)
-            self.db[item.id].append((price,start_date_formatted,end_date_formatted))
+        if item.id == "null" or item.price == "null":
+            print "Item id or price can't be null, please check your input"
         else:
-            self.db[item.id].append((item.price,item.start_date,item.end_date))
+            if item.start_date != "null" and item.end_date != "null":
+                start_date_formatted = datetime.strptime(item.start_date,CRUD.format_str)
+                end_date_formatted = datetime.strptime(item.end_date,CRUD.format_str)
+                self.db[item.id].append((price,start_date_formatted,end_date_formatted))
+            else:
+                self.db[item.id].append((item.price,item.start_date,item.end_date))
     
     def get(self,id,date):
-        input_date = datetime.strptime(date,CRUD.format_str)
-        range_flag = False 
-        if self.db.has_key(id):
-            for row in self.db[id]:
-                if row[1] != "null":
-                    if input_date >= row[1] and input_date <= row[2]:
-                        price = row[0]
-                        range_flag = True 
-                    if range_flag is False:
-                        price = self.db[id][0][0]
-                else:
-                    price = self.db[id][0][0]
-
-            return price 
+        if id == "null" or date == "null":
+            return "id or date can't be null"
         else:
-            error = "Item with id: "+id+" doesn't exist!" 
-            return error 
+            try:
+                input_date = datetime.strptime(date,CRUD.format_str)
+                range_flag = False 
+                if self.db.has_key(id):
+                    for row in self.db[id]:
+                        if row[1] != "null":
+                            if input_date >= row[1] and input_date <= row[2]:
+                                price = row[0]
+                                range_flag = True  
+                            if range_flag is False:
+                                price = self.db[id][0][0]
+                        else:
+                            price = self.db[id][0][0]
+
+                    return price 
+                else:
+                    error = "Item with id: "+id+" doesn't exist!" 
+                    return error
+            except:
+                return "Date Format is incorrect! Follow dd/mm/YYYY"
 
 if __name__=="__main__":
     crud_instance = CRUD()
