@@ -18,13 +18,15 @@ The problem can be easily solved by applying DFS() on each occurrence of first c
 unlike standard DFS(), where we recursively call for all adjacent vertices, here we can recursive call for 8 neighbours only.
 '''
 
-def is_valid(i,j,prevrow,prevcol):
-    return i>=0 and i<r and j>=0 and j<c and i != prevrow and j != prevcol
+def is_valid(i,j,visited):
+    return i>=0 and i<r and j>=0 and j<c and not visited[i][j]
 
-def dfs(grid,i,j,prevrow,prevcol,word,path,index,n):
+def dfs(grid,i,j,visited,word,path,index,n):
     #return if current character doesn't match with next character in word or we exceed the word len limit
     if index>=n or grid[i][j] != word[index]:
         return 
+    
+    visited[i][j] = True 
     #append current character and position to path
     path += word[index]+"("+str(i)+","+str(j)+")"
 
@@ -35,19 +37,22 @@ def dfs(grid,i,j,prevrow,prevcol,word,path,index,n):
     
     #recurse for all connected neighbours
     for k in range(8):
-        if is_valid(i+row[k],j+col[k],prevrow,prevcol):
-            dfs(grid,i+row[k],j+col[k],i,j,word,path,index+1,n)
+        if is_valid(i+row[k],j+col[k],visited):
+            dfs(grid,i+row[k],j+col[k],visited,word,path,index+1,n)
+    visited[i][j] = False 
 
 def find_words(grid,word,n):
     for i in range(r):
         for j in range(c):
             if grid[i][j] == word[0]:
                 #check and print path if exists
-                dfs(grid,i,j,-1,-1,word,"",0,n) #(grid,i,j,previousRow,previousCol,word,stringPath,indexOfCharInWord,lenOfWord)
+                dfs(grid,i,j,visited,word,"",0,n) #(grid,i,j,previousRow,previousCol,word,stringPath,indexOfCharInWord,lenOfWord)
 
-grid = [['B', 'N', 'E', 'Y', 'S'], 
-        ['H', 'E', 'D', 'E', 'S'], 
-        ['S', 'G', 'N', 'D', 'E']]; 
+grid = [
+    ['G','I','Z'],
+    ['U','E','K'],
+    ['Q','S','E']
+]; 
 
 r = len(grid)
 c = len(grid[0])
@@ -55,7 +60,9 @@ c = len(grid[0])
 row = [-1, -1, -1, 0, 0, 1, 1, 1]
 col = [-1, 0, 1, -1, 1, -1, 0, 1]
 
-word = "DES"
+visited = [[0 for i in range(c)] for i in range(r)]
+
+word = "GEEKS"
 n = len(word)
 
 find_words(grid,word,n)
