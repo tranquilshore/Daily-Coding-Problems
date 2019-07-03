@@ -8,7 +8,7 @@ def decode_ways(inpt,n):
     if n == 0:
         return 1
     s = len(inpt)-n 
-    if inpt[s] == 0:
+    if inpt[s] == '0':
         return 0 
     
     result = decode_ways(inpt,n-1)
@@ -23,7 +23,7 @@ def decode_ways_dp(inpt,n,dp):
     if n == 0:
         return 1
     s = len(inpt)-n 
-    if inpt[s] == 0:
+    if inpt[s] == '0':
         return 0 
     
     #change 1
