@@ -36,19 +36,5 @@ def find_combinations(keypad,inpt,res,index):
         find_combinations(keypad,inpt,keypad[digit][i]+res,index-1)
 
 
-#find_combinations(keypad,inpt,"",n-1)
-
-def find_combinations_iterative(keypad,inpt,n):
-    res_list = []
-    for c in keypad[inpt[0]]:
-        res_list.append(c)
-    for i in range(1,n):
-        tmp = []
-        for c in keypad[inpt[i]]:
-            for ch in res_list:
-                tmp.append(ch+c)
-        res_list = tmp 
-    return res_list
-
-print find_combinations_iterative(keypad,inpt,n)
+find_combinations(keypad,inpt,"",n-1)
 
