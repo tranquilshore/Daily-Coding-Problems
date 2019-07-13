@@ -122,7 +122,88 @@ def permutations(s,l,r):
 
 print permutations(s,l,r)
 
+'''
+Longest Non-Repeating Substring
+'''
 
+s = "sahail"
+def longest_non_repeating(s):
+    n = len(s)
+    res = 0
+    start = 0
+    d = {}
+    for i,c in enumerate(s):
+        if c in d:
+            res = max(res,i-start)
+            start = max(start,d[c]+1)
+        d[c] = i 
+    return max(res,n-start)
+
+print longest_non_repeating(s)
+
+'''
+Word Break Problem
+'''
+
+s = "ilikesamsung"
+d = ["i","like","sam","sung"]
+
+def word_break(s,d):
+    if len(s) == 0:
+        return True 
+    for i in range(1,len(s)+1):
+        prefix = s[:i]
+        if prefix in d and word_break(s[i:],d):
+            return True 
+    return False 
+
+print word_break(s,d)
+
+lookup = {}
+def word_break_dp_toptobottom(s,d):
+    n = len(s)
+    if n == 0:#that if we reach the end of the string
+        return True 
+    
+    if lookup.has_key(n) is False:
+        lookup[n] = False #marking subproblem as seen(0 assuming initially string can't be segmented)
+        for i in range(1,n+1):
+            prefix = s[:i]
+            if prefix in d and word_break_dp_toptobottom(s[i:],d):
+                lookup[n] = True 
+                return lookup[n]
+    return lookup[n]  
+        
+print word_break_dp_toptobottom(s,d)
+
+def word_break_dp_bottom_up(s,d):
+    n = len(s)
+    T = [[False for i in range(n)] for i in range(n)]
+
+    for i in range(n):
+        if s[i] in d:
+            T[i][i] = True 
+    
+    for curr_len in range(1,n):
+        i = 0 
+        for j in range(curr_len,n):
+            curr_str = s[i:j+1]
+            
+            if curr_str in d:
+                T[i][j] = True 
+                continue 
+
+            for k in range(i+1,j+1):
+                if T[i][k-1] and T[k][j]:
+                    T[i][j] = True 
+                    break 
+            i += 1
+    
+    return T[0][n-1]
+
+print word_break_dp_bottom_up(s,d)
+
+    
 
 
 
