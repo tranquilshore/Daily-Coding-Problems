@@ -41,7 +41,7 @@ def get_sum(root_seg,start,end):
     return get_sum(root_seg.left,start,end) + get_sum(root_seg.right,start,end)
 
 def update_seg_tree(root_seg,indx,diff):
-    #if update querry range lies outside the node range then just return and don't do further in tree
+    #if update querry range lies outside the node range then just return and don't go further in tree
     if indx < root_seg.start_ind or indx > root_seg.end_ind:
         return 
     #if it is within node range then update the node and go to both children recursively 
