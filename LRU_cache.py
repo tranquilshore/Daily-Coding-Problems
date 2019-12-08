@@ -10,7 +10,6 @@ Will implement in two API:
 1. Set(key,val) : will put the value to the front of the DLL and if the capacity is reached, will remove the last element of DLL
 2. Get(key) : if present will put the element in front of the DLL else return -1.
 
-To visualize the process of set() and get() watch this https://www.youtube.com/watch?v=S6IfqDXWa10
 '''
 
 #doubly linked list node structure with key value pair
