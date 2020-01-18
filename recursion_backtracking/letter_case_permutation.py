@@ -23,22 +23,23 @@ i.e. make it lowercase or uppercase.
 
 s = "a1b2"
 
+
 def letter_case_permutation(s):
-    size = len(s)
     res = []
 
-    def backtrack(s,word,i):
+    def backtrack(s, word, i):
         if i == len(s):
             res.append(word)
-            return 
+            return
 
         if s[i].isalpha():
-            backtrack(s,word+s[i].lower(),i+1)
-            backtrack(s,word+s[i].upper(),i+1)
+            backtrack(s, word+s[i].lower(), i+1)
+            backtrack(s, word+s[i].upper(), i+1)
         else:
-            backtrack(s,word+s[i],i+1)
+            backtrack(s, word+s[i], i+1)
 
-    backtrack(s,"",0)
+    backtrack(s, "", 0)
     return res
+
 
 print letter_case_permutation(s)
